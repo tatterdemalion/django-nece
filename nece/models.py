@@ -24,7 +24,7 @@ class TranslationModel(models.Model, TranslationMixin):
         translated = object.__getattribute__(self, '_translated')
         if translated:
             if hasattr(translated, name):
-                return translated.name
+                return getattr(translated, name)
         return object.__getattribute__(self, name)
 
     def translate(self, language_code=None, **kwargs):

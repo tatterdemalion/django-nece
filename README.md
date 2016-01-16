@@ -1,10 +1,10 @@
 # django-nece
 
 # Attention
- Please keep in mind that this app is under heavy development.
+ Please keep in mind that **nece** is under heavy development.
 
 # Introduction
-A translation mechanism using Postgresql's jsonb field. It simply sets and get translations from a jsonb field called ```translations```. 
+A translation mechanism using Postgresql's jsonb field. It simply sets and gets translations from a jsonb field called ```translations```. 
 It is a simple, yet powerful alternative to [django-hvad](https://github.com/KristianOellegaard/django-hvad). Here is how it works:
 
 Lets say we have a model called ```Fruit```:

@@ -108,12 +108,13 @@ class TranslationManager(models.Manager, TranslationMixin):
         qs = klass(self.model, using=self.db, hints=self._hints)
         return qs
 
-    def language(self, language_code):
+    def language_or_default(self, language_code):
         if self.is_default_language(language_code):
             return self._make_queryset(TranslationQuerySet)
         language_code = self.get_language_key(language_code)
         return self._make_queryset(TranslationQuerySet).language(
-            language_code).filter(translations__has_key=(language_code))
+            language_code)
 
-    def language_or_default(self, language_code):
-        raise NotImplementedError()
+    def language(self, language_code):
+        return self.language_or_default(language_code).filter(
+            translations__has_key=(language_code))

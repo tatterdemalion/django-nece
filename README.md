@@ -1,4 +1,4 @@
-# django-nece
+# nece?
 
 # Attention
  Please keep in mind that **nece** is under heavy development.

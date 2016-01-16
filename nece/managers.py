@@ -2,8 +2,18 @@ from django.db import models
 from django.db.models.query import ModelIterable
 from django.conf import settings
 
-TRANSLATIONS_DEFAULT = getattr(settings, 'TRANSLATIONS_DEFAULT', 'en_us')
-TRANSLATIONS_MAP = getattr(settings, 'TRANSLATIONS_MAP', {'en': 'en_us'})
+
+class TranslationMixin(object):
+    TRANSLATIONS_DEFAULT = getattr(settings, 'TRANSLATIONS_DEFAULT', 'en_us')
+    TRANSLATIONS_MAP = getattr(settings, 'TRANSLATIONS_MAP', {'en': 'en_us'})
+    _default_language_code = TRANSLATIONS_DEFAULT
+
+    def get_language_key(self, language_code):
+        return self.TRANSLATIONS_MAP.get(language_code, language_code)
+
+    def is_default_language(self, language_code):
+        language_code = self.get_language_key(language_code)
+        return language_code == self.TRANSLATIONS_DEFAULT
 
 
 class TranslationModelIterable(ModelIterable):
@@ -12,18 +22,6 @@ class TranslationModelIterable(ModelIterable):
             if self.queryset._language_code:
                 obj.language(self.queryset._language_code)
             yield obj
-
-
-class TranslationMixin(object):
-    _default_language_code = TRANSLATIONS_DEFAULT
-
-    def get_language_key(self, language_code):
-        return TRANSLATIONS_MAP.get(
-            language_code, language_code)
-
-    def is_default_language(self, language_code):
-        language_code = self.get_language_key(language_code)
-        return language_code == TRANSLATIONS_DEFAULT
 
 
 class TranslationQuerySet(models.QuerySet, TranslationMixin):

@@ -55,7 +55,8 @@ class TranslationModel(models.Model, TranslationMixin):
         translations = self.translations or {}
         if translations:
             translations = translations.get(self._language_code, {})
-            self._translated = self.language_class(**translations)
+            if translations:
+                self._translated = self.language_class(**translations)
         return self
 
     def language_or_none(self, language_code):

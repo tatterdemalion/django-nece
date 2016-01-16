@@ -9,7 +9,8 @@ TRANSLATIONS_MAP = getattr(settings, 'TRANSLATIONS_MAP', {'en': 'en_us'})
 class TranslationModelIterable(ModelIterable):
     def __iter__(self):
         for obj in super(TranslationModelIterable, self).__iter__():
-            obj.language(self.queryset._language_code)
+            if self.queryset._language_code:
+                obj.language(self.queryset._language_code)
             yield obj
 
 
@@ -37,32 +38,21 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
         return self
 
     def _clone(self, **kwargs):
-        query = self.query.clone()
-        if self._sticky_filter:
-            query.filter_is_sticky = True
-        clone = self.__class__(model=self.model, query=query,
-                               using=self._db, hints=self._hints)
-        clone._for_write = self._for_write
-        clone._prefetch_related_lookups = self._prefetch_related_lookups[:]
-        clone._known_related_objects = self._known_related_objects
-        clone._iterable_class = self._iterable_class
-        clone._fields = self._fields
+        clone = super(TranslationQuerySet, self)._clone(**kwargs)
         clone._language_code = self._language_code
-        clone.__dict__.update(kwargs)
         return clone
 
 
 class TranslationManager(models.Manager, TranslationMixin):
-    def _make_queryset(self, klass):
-        qs = klass(self.model, using=self.db, hints=self._hints)
+    def get_queryset(self):
+        qs = TranslationQuerySet(self.model, using=self.db, hints=self._hints)
         return qs
 
     def language_or_default(self, language_code):
         if self.is_default_language(language_code):
-            return self._make_queryset(TranslationQuerySet)
+            return self.get_queryset()
         language_code = self.get_language_key(language_code)
-        return self._make_queryset(TranslationQuerySet).language(
-            language_code)
+        return self.get_queryset().language(language_code)
 
     def language(self, language_code):
         return self.language_or_default(language_code).filter(

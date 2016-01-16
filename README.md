@@ -71,6 +71,12 @@ apple
 mela
 ```
 
+## Admin Integration
+
+**nece** has an out-of-the box admin integration by default. It is not pretty yet. But it is also not that hard to use a generic JSON widget.
+
+![admin](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/admin.png)
+
 ## what is nece?
 
 It is Turkish for 'In what language?' or more literally something like 'whatish?' :)

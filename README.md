@@ -44,7 +44,7 @@ You can also filter out the ones containing any language translation:
 [<Fruit: apple>, <Fruit: pear>, <Fruit: banana>]
 >> Fruit.objects.language('tr_tr')
 [<Fruit: elma>, <Fruit: armut>]  # there is no translation for banana
->> Fruit.objects.language_or_default('tr_tr') # a work in progress
+>> Fruit.objects.language_or_default('tr_tr')
 [<Fruit: elma>, <Fruit: armut>, <Fruit: banana>]
 ```
 

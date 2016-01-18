@@ -1,9 +1,15 @@
 from __future__ import unicode_literals
 from collections import namedtuple
 
+from distutils.version import StrictVersion
+from django import get_version
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 from nece.managers import TranslationManager, TranslationMixin
+
+if StrictVersion(get_version()) >= StrictVersion('1.9.0'):
+    from django.contrib.postgres.fields import JSONField
+else:
+    from nece.fields.pgjson import JSONField
 
 
 class TranslationModel(models.Model, TranslationMixin):

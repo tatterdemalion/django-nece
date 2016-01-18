@@ -1,6 +1,12 @@
 from django.db import models
-from django.db.models.query import ModelIterable
+from distutils.version import StrictVersion
+from django import get_version
 from django.conf import settings
+
+if StrictVersion(get_version()) >= StrictVersion('1.9.0'):
+    from django.db.models.query import ModelIterable
+else:
+    ModelIterable = object  # just mocking it
 
 
 class TranslationMixin(object):
@@ -39,6 +45,12 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
         clone = super(TranslationQuerySet, self)._clone(**kwargs)
         clone._language_code = self._language_code
         return clone
+
+    def iterator(self):
+        for obj in super(TranslationQuerySet, self).iterator():
+            if self.queryset._language_code:
+                obj.language(self.queryset._language_code)
+            yield obj
 
 
 class TranslationManager(models.Manager, TranslationMixin):

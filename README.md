@@ -1,4 +1,4 @@
-# django-nece
+# nece?
 
 # Attention
  Please keep in mind that **nece** is under heavy development.
@@ -77,7 +77,7 @@ mela
 
 ![admin](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/admin.png)
 
-## what is nece?
+## what does "nece" mean?
 
 It is Turkish for 'In what language?' or more literally something like 'whatish?' :)
 

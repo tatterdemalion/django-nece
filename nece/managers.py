@@ -59,11 +59,14 @@ class TranslationManager(models.Manager, TranslationMixin):
         return qs
 
     def language_or_default(self, language_code):
-        if self.is_default_language(language_code):
-            return self.get_queryset()
         language_code = self.get_language_key(language_code)
-        return self.get_queryset().language(language_code)
+        qs = self.get_queryset()
+        qs._language_code = language_code
+        if self.is_default_language(language_code):
+            return qs
+        return qs.language(language_code)
 
     def language(self, language_code):
+        language_code = self.get_language_key(language_code)
         return self.language_or_default(language_code).filter(
             translations__has_key=(language_code))

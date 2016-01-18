@@ -48,8 +48,8 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
 
     def iterator(self):
         for obj in super(TranslationQuerySet, self).iterator():
-            if self.queryset._language_code:
-                obj.language(self.queryset._language_code)
+            if self._language_code:
+                obj.language(self._language_code)
             yield obj
 
 

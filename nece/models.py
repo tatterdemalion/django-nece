@@ -5,6 +5,7 @@ from distutils.version import StrictVersion
 from django import get_version
 from django.db import models
 from nece.managers import TranslationManager, TranslationMixin
+from nece.exceptions import NonTranslatableFieldError
 
 if StrictVersion(get_version()) >= StrictVersion('1.9.0'):
     from django.contrib.postgres.fields import JSONField
@@ -39,6 +40,8 @@ class TranslationModel(models.Model, TranslationMixin):
             self.translations[language_code] = {}
             self._language_code = language_code
         for name, value in kwargs.items():
+            if name not in self.translatable_fields:
+                raise NonTranslatableFieldError(name)
             if self.is_default_language(self._language_code):
                 setattr(self, name, value)
             else:

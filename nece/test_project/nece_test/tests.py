@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.test import TestCase
 from nece_test.models import Fruit
+from nece.exceptions import NonTranslatableFieldError
 
 
 class TranslationTest(TestCase):
@@ -39,3 +40,13 @@ class TranslationTest(TestCase):
         self.assertEqual(fruit.translations['de_de']['name'], 'nicht Apfel')
         self.assertEqual(fruit.default_language.name, 'not apple')
         fruit.save()
+
+    def test_nontranslatable_fields(self):
+        fruit = Fruit.objects.get(name='apple')
+        with self.assertRaises(NonTranslatableFieldError) as error:
+            fruit.translate('it_it', dummy_field='hello')
+        self.assertEqual(error.exception.fieldname, 'dummy_field')
+
+    def test_translation_mapping(self):
+        self.assertTrue(Fruit.objects.language('tr').exists())
+        self.assertEqual(Fruit.objects.language('tr')[0].name, 'elma')

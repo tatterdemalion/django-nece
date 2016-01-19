@@ -4,7 +4,11 @@
  Please keep in mind that **nece** is under heavy development.
 
 # Introduction
-A translation mechanism using Postgresql's jsonb field. It simply sets and gets translations from a jsonb field called ```translations```. 
+
+
+![nece](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/images/nece.png)
+
+A "Content Translation Framework" using Postgresql's jsonb field. It simply sets and gets translations from a jsonb field called ```translations```. 
 It is a simple, yet powerful alternative to [django-hvad](https://github.com/KristianOellegaard/django-hvad). Here is how it works:
 
 Lets say we have a model called ```Fruit```:
@@ -75,7 +79,7 @@ mela
 
 **nece** has an out-of-the box admin integration by default. It is not pretty yet. But it is also not that hard to use a generic JSON widget.
 
-![admin](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/admin.png)
+![admin](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/images/admin.png)
 
 
 ## Why?
@@ -88,6 +92,3 @@ On the other hand ```django-modeldtranslations``` adds multiple additional field
 
 ```nece?``` more or less works like the latter one with an important difference. It uses Postgresql's new ```JSONB``` field to hold translation information. And overrides the original one on query.
 
-## what does "nece" mean?
-
-It is Turkish for 'In what language?' or more literally something like 'whatish?' :)

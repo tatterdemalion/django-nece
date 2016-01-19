@@ -7,6 +7,8 @@ from nece.models import TranslationModel
 class Fruit(TranslationModel):
     name = models.CharField(max_length=255)
     benefits = models.CharField(max_length=255)
+    scientific_name = models.CharField(max_length=255)
+
     translatable_fields = ['name', 'benefits']
 
     def __str__(self):

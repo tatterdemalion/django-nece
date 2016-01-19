@@ -26,13 +26,20 @@ class TranslationModel(models.Model, TranslationMixin):
         return super(TranslationModel, self).__init__(*args, **kwargs)
 
     def __getattribute__(self, name):
+        attr = object.__getattribute__(self, name)
         if name.startswith('__'):
-            return object.__getattribute__(self, name)
+            return attr
         translated = object.__getattribute__(self, '_translated')
         if translated:
             if hasattr(translated, name):
-                return getattr(translated, name)
-        return object.__getattribute__(self, name)
+                return getattr(translated, name) or attr
+        return attr
+
+    def populate_translations(self, translations):
+        for field in self.translatable_fields:
+            if field not in translations:
+                translations[field] = None
+        return translations
 
     def translate(self, language_code=None, **kwargs):
         if language_code:
@@ -65,6 +72,7 @@ class TranslationModel(models.Model, TranslationMixin):
         if translations:
             translations = translations.get(self._language_code, {})
             if translations:
+                translations = self.populate_translations(translations)
                 self._translated = self.language_class(**translations)
         return self
 

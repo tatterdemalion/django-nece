@@ -7,10 +7,14 @@ from nece.exceptions import NonTranslatableFieldError
 
 class TranslationTest(TestCase):
     def setUp(self):
-        fruit = Fruit.objects.create(name='apple', benefits='good for health')
+        fruit = Fruit.objects.create(
+            name='apple',
+            benefits='good for health',
+            scientific_name='malus domestica')
         fruit.translate('de_de', name='Apfel',
                         benefits='gut für die Feuerstelle')
         fruit.translate('tr_tr', name='elma', benefits='Kalbe yararlıdır')
+        fruit.translate('ku_tr', name='sêv')
         fruit.save()
 
     def test_query(self):

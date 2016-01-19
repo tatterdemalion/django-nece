@@ -77,8 +77,17 @@ mela
 
 ![admin](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/admin.png)
 
+
+## Why?
+
+You might ask why should you use django-nece since there are other, and more mature content translation frameworks like [django-hvad](https://github.com/kristianoellegaard/django-hvad) and [django-modeltransltaion](https://github.com/deschler/django-modeltranslation). Both of them are good in some ways, worst in others. 
+
+For instance, it is very hard for ```django-hvad``` users to get default language if there is no corresponding translation for an object. And it holds translated values in a different table, so every translation query results in another hit to the database.
+
+On the other hand ```django-modeldtranslations``` adds multiple additional fields for multiple languages. The number of fields inceases by the number of languages you need to support. At the end it becomes a huge chunk of an object if you need to add more than 20 languages.
+
+```nece?``` more or less works like the latter one with an important difference. It uses Postgresql's new ```JSONB``` field to hold translation information. And overrides the original one on query.
+
 ## what does "nece" mean?
 
 It is Turkish for 'In what language?' or more literally something like 'whatish?' :)
-
-

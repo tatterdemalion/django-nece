@@ -16,7 +16,7 @@ setup(
     download_url='https://github.com/tatterdemalion/django-nece/tarball/0.1',
     packages=['nece'],
     install_requires=[
-        'Django>=1.9',
+        'Django>=1.8',
     ],
     classifiers=[
         "Framework :: Django",
@@ -29,5 +29,7 @@ setup(
         "Topic :: Database",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Text Processing :: Linguistic",
-    ]
+    ],
+    test_suite='nose.collector',
+    tests_require=['nose'],
 )

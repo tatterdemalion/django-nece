@@ -1,21 +1,14 @@
 #-*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.test import TestCase
-from nece_test.models import Fruit
+from .models import Fruit
+from .fixtures import create_fixtures
 from nece.exceptions import NonTranslatableFieldError
 
 
 class TranslationTest(TestCase):
     def setUp(self):
-        fruit = Fruit.objects.create(
-            name='apple',
-            benefits='good for health',
-            scientific_name='malus domestica')
-        fruit.translate('de_de', name='Apfel',
-                        benefits='gut für die Feuerstelle')
-        fruit.translate('tr_tr', name='elma', benefits='Kalbe yararlıdır')
-        fruit.translate('ku_tr', name='sêv')
-        fruit.save()
+        create_fixtures()
 
     def test_query(self):
         self.assertTrue(Fruit.objects.all())

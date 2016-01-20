@@ -30,6 +30,4 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Text Processing :: Linguistic",
     ],
-    test_suite='nose.collector',
-    tests_require=['nose'],
 )

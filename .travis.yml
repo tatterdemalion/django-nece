@@ -25,7 +25,5 @@ before_script:
 install:
   - pip install -q -r "tests/requirements/django-$DJANGO.txt" && pip install coveralls
 
-script: coverage run --source=nece --omit='nece/tests*' runtest.py
-
 after_success:
   if [[ $COVERALLS_REPO_TOKEN ]]; then coveralls; fi

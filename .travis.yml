@@ -23,3 +23,9 @@ install:
 
 after_success:
   if [[ $COVERALLS_REPO_TOKEN ]]; then coveralls; fi
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.4"

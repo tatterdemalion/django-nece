@@ -11,7 +11,7 @@ A "Content Translation Framework" using Postgresql's jsonb field. It simply sets
 
 ### Why?
 
-You might ask why should you use django-nece since there are other, and more mature content translation frameworks like [django-hvad](https://github.com/kristianoellegaard/django-hvad) and [django-modeltranslation](https://github.com/deschler/django-modeltranslation). Both of them are good in some ways, worst in others. 
+You might ask why you should use django-nece since there are other, and more mature content translation frameworks like [django-hvad](https://github.com/kristianoellegaard/django-hvad) and [django-modeltranslation](https://github.com/deschler/django-modeltranslation). Both of them are good in some ways, worst in others. 
 
 For instance, it is very hard for ```django-hvad``` users to get default language if there is no corresponding translation for an object. And it holds translated values in a different table, so every translation query results in another hit to the database.
 
@@ -21,7 +21,7 @@ On the other hand ```django-modeldtranslation``` adds multiple additional fields
 
 ## Installation
 
-The package is under active development and is not on pypi yet. But you can still install the master branch by either cloning the repository and calling:
+The package is under active development and is not on pypi yet. But you can still install the master branch by either cloning the repository & running:
 
 ```
 python setup.py install

@@ -27,7 +27,7 @@ def get_fixtures(n=None):
     ]
     n = n or len(fixtures)
     fixtures = itertools.cycle(fixtures)
-    for _ in xrange(n):
+    for _ in range(n):
         yield next(fixtures)
 
 

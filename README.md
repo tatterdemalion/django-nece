@@ -1,9 +1,9 @@
 # nece? [![Build Status](https://travis-ci.org/tatterdemalion/django-nece.svg?branch=master)](https://travis-ci.org/tatterdemalion/django-nece)
 
-# Attention
+## Attention
  Please keep in mind that **nece** is under heavy development.
 
-# Introduction
+## Introduction
 
 
 ![nece](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/images/nece.png)
@@ -52,7 +52,7 @@ You can also filter out the ones containing any language translation:
 [<Fruit: elma>, <Fruit: armut>, <Fruit: banana>]
 ```
 
-## Updating translations
+### Updating translations
 
 ```
 >> fruit._language_code
@@ -67,7 +67,7 @@ armut
 apple
 ```
 
-## Adding new languages
+### Adding new languages
 
 ```
 >> fruit.translate('it_it', name='mela')
@@ -75,14 +75,14 @@ apple
 mela
 ```
 
-## Admin Integration
+### Admin Integration
 
 **nece** has an out-of-the box admin integration by default. It is not pretty yet. But it is also not that hard to use a generic JSON widget.
 
 ![admin](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/images/admin.png)
 
 
-## Why?
+### Why?
 
 You might ask why should you use django-nece since there are other, and more mature content translation frameworks like [django-hvad](https://github.com/kristianoellegaard/django-hvad) and [django-modeltranslation](https://github.com/deschler/django-modeltranslation). Both of them are good in some ways, worst in others. 
 

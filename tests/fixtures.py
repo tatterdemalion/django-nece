@@ -24,6 +24,27 @@ def get_fixtures(n=None):
             "benefits": "good for health",
             "scientific_name": "malus domestica"
         },
+        {
+            "translations": {
+                "fi_fi": {
+                    "benefits": "Päärynät tarjoavat erittäin hyvä kuidun"
+                    "lähde, ja ne ovat myös hyvä lähde B2-vitamiinia, "
+                    "C, E, kupari, ja kalium.",
+                    "name": "päärynät"
+                },
+                "tr_tr": {
+                    "benefits": "Armut lif çok iyi bir kaynağı sağlar ve "
+                    "aynı zamanda vitamin B2, C, E, bakır ve potasyum "
+                    "için iyi bir kaynaktır.",
+                    "name": "armut"
+                }
+            },
+            "name": "pear",
+            "benefits": "Pears provide a very good source of fiber and "
+            "are also a good source of vitamin B2, C, E, copper, "
+            "and potassium.",
+            "scientific_name": "Pyrus"
+        },
     ]
     n = n or len(fixtures)
     fixtures = itertools.cycle(fixtures)

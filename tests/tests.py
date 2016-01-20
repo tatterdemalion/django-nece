@@ -11,7 +11,7 @@ class TranslationTest(TestCase):
         create_fixtures()
 
     def test_query(self):
-        self.assertTrue(Fruit.objects.all())
+        self.assertTrue(Fruit.objects.all().exists())
 
     def test_language_filter(self):
         self.assertEqual(Fruit.objects.language('de_de')[0].name, 'Apfel')

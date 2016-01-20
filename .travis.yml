@@ -1,0 +1,31 @@
+language: python
+python:
+  - "2.7"
+  - "pypy"
+script:
+  - python setup.py build_ext -i
+  - python -m compileall -f .
+  - python runtests.py
+
+
+language: python
+
+python:
+  - 3.4
+  - 2.7
+
+env:
+  matrix:
+    - DJANGO=1.8 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+    - DJANGO=1.9 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+
+before_script:
+  - sh -c "psql -c 'DROP DATABASE IF EXISTS django_nece_test;' -U postgres;
+    psql -c 'create database django_nece_test;' -U postgres;"
+install:
+  - pip install -q -r "tests/requirements/django-$DJANGO.txt" && pip install coveralls
+
+script: coverage run --source=nece --omit='nece/tests*' runtest.py
+
+after_success:
+  if [[ $COVERALLS_REPO_TOKEN ]]; then coveralls; fi

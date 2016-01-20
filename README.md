@@ -1,4 +1,4 @@
-# nece?
+# nece? [![Build Status](https://travis-ci.org/tatterdemalion/django-nece.svg?branch=master)](https://travis-ci.org/tatterdemalion/django-nece)
 
 # Attention
  Please keep in mind that **nece** is under heavy development.

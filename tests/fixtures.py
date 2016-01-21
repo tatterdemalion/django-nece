@@ -45,6 +45,12 @@ def get_fixtures(n=None):
             "and potassium.",
             "scientific_name": "Pyrus"
         },
+        {
+            "name": "banana",
+            "benefits": "Potassium",
+            "scientific_name": "Musa acuminata"
+        },
+
     ]
     n = n or len(fixtures)
     fixtures = itertools.cycle(fixtures)

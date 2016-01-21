@@ -10,11 +10,20 @@ class TranslationTest(TestCase):
     def setUp(self):
         create_fixtures()
 
-    def test_query(self):
-        self.assertTrue(Fruit.objects.all().exists())
+    def test_basic_queries(self):
+        Fruit.objects.all()
+        Fruit.objects.filter(name='apple')
+        Fruit.objects.values()
+        Fruit.objects.values_list()
+        Fruit.objects.earliest('pk')
+        Fruit.objects.latest('pk')
 
     def test_language_filter(self):
         self.assertEqual(Fruit.objects.language('de_de')[0].name, 'Apfel')
+
+    def test_language_or_default(self):
+        fruits = Fruit.objects.language_or_default('tr_tr')
+        self.assertEqual(fruits.count(), 3)
 
     def test_language_switch(self):
         fruit = Fruit.objects.get(name='apple')

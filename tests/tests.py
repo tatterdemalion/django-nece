@@ -38,6 +38,10 @@ class TranslationTest(TestCase):
         self.assertEqual(fruit.default_language.name, 'not apple')
         fruit.save()
 
+    def test_get_by_language(self):
+        self.assertEqual(
+            Fruit.objects.language('tr_tr').get(name='elma').name, 'elma')
+
     def test_nontranslatable_fields(self):
         fruit = Fruit.objects.get(name='apple')
         with self.assertRaises(NonTranslatableFieldError) as error:

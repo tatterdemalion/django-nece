@@ -15,7 +15,8 @@ class TranslationMixin(object):
     _default_language_code = TRANSLATIONS_DEFAULT
 
     def get_language_key(self, language_code):
-        return self.TRANSLATIONS_MAP.get(language_code, language_code)
+        return (self.TRANSLATIONS_MAP.get(language_code, language_code) or
+                self._default_language_code)
 
     def is_default_language(self, language_code):
         language_code = self.get_language_key(language_code)
@@ -46,6 +47,16 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
         clone._language_code = self._language_code
         return clone
 
+    def filter(self, *args, **kwargs):
+        if not self.is_default_language(self._language_code):
+            for key, value in kwargs.items():
+                if key.split('__')[0] in self.model.translatable_fields:
+                    del kwargs[key]
+                    key = 'translations__{}__{}'.format(
+                        self._language_code, key)
+                    kwargs[key] = value
+        return super(TranslationQuerySet, self).filter(*args, **kwargs)
+
     def iterator(self):
         for obj in super(TranslationQuerySet, self).iterator():
             if self._language_code:
@@ -54,17 +65,15 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
 
 
 class TranslationManager(models.Manager, TranslationMixin):
-    def get_queryset(self):
+    def get_queryset(self, language_code=None):
         qs = TranslationQuerySet(self.model, using=self.db, hints=self._hints)
+        language_code = self.get_language_key(language_code)
+        qs.language(language_code)
         return qs
 
     def language_or_default(self, language_code):
         language_code = self.get_language_key(language_code)
-        qs = self.get_queryset()
-        qs._language_code = language_code
-        if self.is_default_language(language_code):
-            return qs
-        return qs.language(language_code)
+        return self.get_queryset(language_code)
 
     def language(self, language_code):
         language_code = self.get_language_key(language_code)

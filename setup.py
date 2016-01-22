@@ -4,7 +4,7 @@ from setuptools import setup
 description = "A content translation framework using Postgresql's " +\
     "jsonb field in the background",
 
-version = '0.4'
+version = '0.4.1'
 url = 'https://github.com/tatterdemalion/django-nece'
 download_url = '/'.join([url, 'tarball', version])
 
@@ -22,6 +22,7 @@ setup(
               'nece.fields.pgjson.forms'],
     install_requires=[
         'Django>=1.8',
+        'psycopg2>=2.5.4'
     ],
     classifiers=[
         "Framework :: Django",

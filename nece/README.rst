@@ -1,10 +1,17 @@
 nece?
 =====
 
-.. image:: https://travis-ci.org/tatterdemalion/django-nece.svg?branch=master
+.. image:: https://img.shields.io/travis/tatterdemalion/django-nece/master.svg
     :target: https://travis-ci.org/tatterdemalion/django-nece
-.. image:: https://coveralls.io/repos/github/tatterdemalion/django-nece/badge.svg?branch=master
-    :target: https://coveralls.io/github/tatterdemalion/django-nece?branch=master 
+
+.. image:: https://img.shields.io/coveralls/tatterdemalion/django-nece.svg
+    :target: https://coveralls.io/r/tatterdemalion/django-nece
+
+.. image:: https://img.shields.io/pypi/v/nece.svg
+    :target: https://pypi.python.org/pypi/nece
+
+.. image:: https://img.shields.io/pypi/pyversions/nece.svg
+    :target: https://pypi.python.org/pypi/nece/
 
 Introduction
 ------------

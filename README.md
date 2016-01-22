@@ -18,22 +18,16 @@ On the other hand ```django-modeldtranslation``` adds multiple additional fields
 
 ## Installation
 
-#### via pypi:
+### via pypi:
 
 ```
-pip install django-nece
+pip install nece
 ```
 
-#### via setup.py
+### via setup.py
 
 ```
 python setup.py install
-```
-
-#### or via pip:
-
-```
-pip install git+https://github.com/tatterdemalion/django-nece.git
 ```
 
 ## Usage

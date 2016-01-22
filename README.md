@@ -1,8 +1,5 @@
 # nece? [![Build Status](https://travis-ci.org/tatterdemalion/django-nece.svg?branch=master)](https://travis-ci.org/tatterdemalion/django-nece)
 
-## Attention
- Please keep in mind that **nece** is under heavy development.
-
 ## Introduction
 
 ![nece](https://raw.githubusercontent.com/tatterdemalion/django-nece/master/images/nece.png)
@@ -21,13 +18,19 @@ On the other hand ```django-modeldtranslation``` adds multiple additional fields
 
 ## Installation
 
-The package is under active development and is not on pypi yet. But you can still install the master branch by either cloning the repository & running:
+#### via pypi:
+
+```
+pip install django-nece
+```
+
+#### via setup.py
 
 ```
 python setup.py install
 ```
 
-or via pip:
+#### or via pip:
 
 ```
 pip install git+https://github.com/tatterdemalion/django-nece.git

@@ -3,6 +3,7 @@ nece?
 
 .. image:: https://travis-ci.org/tatterdemalion/django-nece.svg?branch=master
     :target: https://travis-ci.org/tatterdemalion/django-nece
+.. image:: https://coveralls.io/repos/github/tatterdemalion/django-nece/badge.svg?branch=master :target: https://coveralls.io/github/tatterdemalion/django-nece?branch=master 
 
 Introduction
 ------------

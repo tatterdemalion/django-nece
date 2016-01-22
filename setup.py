@@ -6,7 +6,7 @@ description = "A content translation framework using Postgresql's "
 
 setup(
     name='nece',
-    version='0.1',
+    version='0.2',
     description=description,
     long_description=description,
     author='Can Mustafa Özdemir',

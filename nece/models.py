@@ -43,9 +43,9 @@ class TranslationModel(models.Model, TranslationMixin):
 
     def translate(self, language_code=None, **kwargs):
         if language_code:
-            self.translations = self.translations or {}
-            self.translations[language_code] = {}
             self._language_code = language_code
+        self.translations = self.translations or {}
+        self.translations[self._language_code] = {}
         for name, value in kwargs.items():
             if name not in self.translatable_fields:
                 raise NonTranslatableFieldError(name)

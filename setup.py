@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-with open('README.md', 'rb') as f:
-    long_description = f.read().decode('utf-8')
-
+description = "A content translation framework using Postgresql's "
+"jsonb field in the background",
 
 setup(
     name='nece',
     version='0.1',
-    description="A content translation framework using Postgresql's "
-                "jsonb field in the background",
-    long_description=long_description,
+    description=description,
+    long_description=description,
     author='Can Mustafa Özdemir',
     author_email='canmustafaozdemir@gmail.com',
     url='https://github.com/tatterdemalion/django-nece',

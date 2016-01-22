@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-description = "A content translation framework using Postgresql's "
-"jsonb field in the background",
+description = "A content translation framework using Postgresql's " +\
+    "jsonb field in the background",
 
 setup(
     name='nece',
-    version='0.2',
+    version='0.3',
     description=description,
     long_description=description,
     author='Can Mustafa Özdemir',
     author_email='canmustafaozdemir@gmail.com',
     url='https://github.com/tatterdemalion/django-nece',
-    download_url='https://github.com/tatterdemalion/django-nece/tarball/0.1',
+    download_url='https://github.com/tatterdemalion/django-nece/tarball/0.3',
     keywords=['translations', 'i18n', 'language', 'multilingual'],
-    packages=['nece'],
+    packages=['nece', 'nece.fields', 'nece.fields.pgjson',
+              'nece.fields.pgjson.forms'],
     install_requires=[
         'Django>=1.8',
     ],

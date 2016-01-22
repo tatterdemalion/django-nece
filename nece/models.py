@@ -14,7 +14,7 @@ else:
 
 
 class TranslationModel(models.Model, TranslationMixin):
-    translations = JSONField(null=True)
+    translations = JSONField(null=True, blank=True)
     default_language = None
     _translated = None
 
@@ -87,6 +87,8 @@ class TranslationModel(models.Model, TranslationMixin):
     def save(self, *args, **kwargs):
         language_code = self._language_code
         self.reset_language()
+        if self.translations == '':
+            self.translations = None
         super(TranslationModel, self).save(*args, **kwargs)
         self.language(language_code)
 

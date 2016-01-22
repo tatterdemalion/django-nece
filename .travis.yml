@@ -7,6 +7,7 @@ script:
   - python setup.py build_ext -i
   - python -m compileall -f .
   - python runtests.py
+  - coverage run --source=nece --omit='nece/tests*' runtests.py
 
 env:
   matrix:
@@ -18,10 +19,10 @@ before_script:
     psql -c 'create database django_nece_test;' -U postgres;"
 
 install:
-  - pip install -q -r "tests/requirements/django-$DJANGO.txt" && pip install coveralls
+  - pip install -q -r "tests/requirements/django-$DJANGO.txt"
 
 after_success:
-  if [[ $COVERALLS_REPO_TOKEN ]]; then coveralls; fi
+  - coveralls
 
 services:
   - postgresql

@@ -19,8 +19,6 @@ Introduction
 .. figure:: https://raw.githubusercontent.com/tatterdemalion/django-nece/master/images/nece.png
    :alt: nece
 
-   nece
-
 A “Content Translation Framework” using Postgresql’s jsonb field. It
 simply sets and gets translations from a jsonb field called
 ``translations``.

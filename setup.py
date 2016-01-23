@@ -5,7 +5,7 @@ from setuptools import setup
 with open('README.rst') as f:
     long_description = f.read()
 
-version = '0.4.2'
+version = '0.4.3'
 description = "A content translation framework using Postgresql's jsonb" + \
     " field in the background"
 url = 'https://github.com/tatterdemalion/django-nece'

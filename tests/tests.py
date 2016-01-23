@@ -19,7 +19,10 @@ class TranslationTest(TestCase):
         Fruit.objects.latest('pk')
 
     def test_language_filter(self):
-        self.assertEqual(Fruit.objects.language('de_de')[0].name, 'Apfel')
+        self.assertEqual(Fruit.objects.language('en_us').get(
+            name='apple').name, 'apple')
+        self.assertEqual(Fruit.objects.language('de_de').get(
+            name="Apfel").name, 'Apfel')
 
     def test_language_or_default(self):
         fruits = Fruit.objects.language_or_default('tr_tr')

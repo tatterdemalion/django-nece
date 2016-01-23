@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
+
+with open('README.rst') as f:
+    long_description = f.read()
+
+version = '0.4.2'
 description = "A content translation framework using Postgresql's jsonb" + \
     " field in the background",
-
-version = '0.4.1'
 url = 'https://github.com/tatterdemalion/django-nece'
 download_url = '/'.join([url, 'tarball', version])
-
-with open('README.rst', 'rb') as f:
-    long_description = f.read().decode('utf-8')
-
 
 setup(
     name='nece',

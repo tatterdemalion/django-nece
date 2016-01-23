@@ -2,8 +2,8 @@ import json
 
 from psycopg2.extras import Json
 
-from forms import JSONField as JSONFormField
-from lookups import (DataContains, ContainedBy, HasKey, HasKeys, HasAnyKeys)
+from .forms import JSONField as JSONFormField
+from .lookups import (DataContains, ContainedBy, HasKey, HasKeys, HasAnyKeys)
 from django.core import exceptions
 from django.db.models import Field, Transform
 from django.utils.translation import ugettext_lazy as _

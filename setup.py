@@ -7,7 +7,7 @@ with open('README.rst') as f:
 
 version = '0.4.2'
 description = "A content translation framework using Postgresql's jsonb" + \
-    " field in the background",
+    " field in the background"
 url = 'https://github.com/tatterdemalion/django-nece'
 download_url = '/'.join([url, 'tarball', version])
 

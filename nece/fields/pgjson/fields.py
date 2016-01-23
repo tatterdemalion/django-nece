@@ -2,8 +2,8 @@ import json
 
 from psycopg2.extras import Json
 
-import forms
-import lookups
+from forms import JSONField as JSONFormField
+from lookups import (DataContains, ContainedBy, HasKey, HasKeys, HasAnyKeys)
 from django.core import exceptions
 from django.db.models import Field, Transform
 from django.utils.translation import ugettext_lazy as _
@@ -55,16 +55,16 @@ class JSONField(Field):
         return value
 
     def formfield(self, **kwargs):
-        defaults = {'form_class': forms.JSONField}
+        defaults = {'form_class': JSONFormField}
         defaults.update(kwargs)
         return super(JSONField, self).formfield(**defaults)
 
 
-JSONField.register_lookup(lookups.DataContains)
-JSONField.register_lookup(lookups.ContainedBy)
-JSONField.register_lookup(lookups.HasKey)
-JSONField.register_lookup(lookups.HasKeys)
-JSONField.register_lookup(lookups.HasAnyKeys)
+JSONField.register_lookup(DataContains)
+JSONField.register_lookup(ContainedBy)
+JSONField.register_lookup(HasKey)
+JSONField.register_lookup(HasKeys)
+JSONField.register_lookup(HasAnyKeys)
 
 
 class KeyTransform(Transform):

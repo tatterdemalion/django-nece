@@ -45,6 +45,16 @@ chunk of an object if you need to add more than 20 languages.
 difference. It uses Postgresql’s new ``JSONB`` field to hold translation
 information. And overrides the original one on query.
 
+Dependencies
+------------
+
+::
+
+    postgresql >= 9.4
+    Django >= 1.8
+    psycopg2 >= 2.5.4
+
+
 Installation
 ------------
 

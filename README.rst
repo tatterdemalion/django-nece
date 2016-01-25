@@ -136,6 +136,63 @@ Updating translations
     >> fruit.name
     armut
     >> fruit.language('en')
+    >> fruit.translate('it_it', name='pera')
+    >> fruit.language('it_it')
+    >> fruit.name
+    pera
+
+Settings
+--------
+
+TRANSLATIONS_DEFAULT
+~~~~~~~~~~~~~~~~~~~~
+
+Default language code. Default value: ```en_us```
+
+TRANSLATIONS_MAP
+~~~~~~~~~~~~~~~~
+
+Shortcuts for ```languagecode_countrycode``` notation. 
+
+Example:
+
+::
+
+    TRANSLATIONS_MAP = {
+        "en": "en_us",
+        "tr": "tr_tr",
+        "ar": "ar_sy",
+        "bg": "bg_bg",
+        "cs": "cs_cz",
+        "da": "da_dk",
+        "de": "de_de",
+        "el": "el_gr",
+        "es": "es_es",
+        "fi": "fi_fi",
+        "fr": "fr_fr",
+        "hu": "hu_hu",
+        "it": "it_it",
+        "ja": "ja_ja",
+        "nl": "nl_nl",
+        "pl": "pl_pl",
+        "pt": "pt_pt",
+        "ro": "ro_ro",
+        "ru": "ru_ru",
+        "sv": "sv_se",
+        "zh": "zh_cn"
+    }
+
+
+Default:
+
+::
+
+    {'en': 'en_us'}
+
+
+
+
+
 
 .. _django-hvad: https://github.com/kristianoellegaard/django-hvad
 .. _django-modeltranslation: https://github.com/deschler/django-modeltranslation

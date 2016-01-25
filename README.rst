@@ -63,7 +63,7 @@ via pypi:
 
 ::
 
-    pip install django-nece
+    pip install nece
 
 via setup.py
 ~~~~~~~~~~~~

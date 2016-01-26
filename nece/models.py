@@ -63,11 +63,11 @@ class TranslationModel(models.Model, TranslationMixin):
     def language(self, language_code):
         self.reset_language()
         fields = self.translatable_fields
-        self.default_language = self.language_class(
-            **{i: getattr(self, i, None) for i in fields})
         self._language_code = self.get_language_key(language_code)
         if self.is_default_language(language_code):
             return self
+        self.default_language = self.language_class(
+            **{i: getattr(self, i, None) for i in fields})
         translations = self.translations or {}
         if translations:
             translations = translations.get(self._language_code, {})

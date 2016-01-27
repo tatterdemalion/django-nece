@@ -3,7 +3,9 @@ from setuptools import setup
 
 
 with open('README.rst') as f:
-    long_description = f.read()
+    ld = f.read()
+
+long_description = ld.replace(ld[0:ld.find('nece?\n=====\n\n')], '')
 
 version = '0.4.4'
 description = "A content translation framework using Postgresql's jsonb" + \

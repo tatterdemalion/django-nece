@@ -1,6 +1,3 @@
-nece?
-=====
-
 .. image:: https://img.shields.io/travis/tatterdemalion/django-nece/master.svg
     :target: https://travis-ci.org/tatterdemalion/django-nece
 
@@ -12,6 +9,10 @@ nece?
 
 .. image:: https://img.shields.io/pypi/pyversions/nece.svg
     :target: https://pypi.python.org/pypi/nece/
+
+
+nece?
+=====
 
 Introduction
 ------------

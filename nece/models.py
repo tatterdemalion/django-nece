@@ -84,7 +84,9 @@ class TranslationModel(models.Model, TranslationMixin):
             return None
         return self.language(language_code)
 
-    def language_as_dict(self, language_code):
+    def language_as_dict(self, language_code=None):
+        if not language_code:
+            language_code = self._language_code
         tf = self.translatable_fields
         language_code = self.get_language_key(language_code)
         if self.is_default_language(language_code):

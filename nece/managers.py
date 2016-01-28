@@ -38,9 +38,18 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
         super(TranslationQuerySet, self).__init__(model, query, using, hints)
         self._iterable_class = TranslationModelIterable
 
-    def language(self, language_code):
+    def language_or_default(self, language_code):
+        language_code = self.get_language_key(language_code)
         self._language_code = language_code
         return self
+
+    def language(self, language_code):
+        language_code = self.get_language_key(language_code)
+        self._language_code = language_code
+        results = self.language_or_default(language_code)
+        if self.is_default_language(language_code):
+            return results
+        return results.filter(translations__has_key=(language_code))
 
     def _clone(self, *args, **kwargs):
         clone = super(TranslationQuerySet, self)._clone(*args, **kwargs)
@@ -73,11 +82,9 @@ class TranslationManager(models.Manager, TranslationMixin):
 
     def language_or_default(self, language_code):
         language_code = self.get_language_key(language_code)
-        return self.get_queryset(language_code)
+        return self.get_queryset(language_code).language_or_default(
+            language_code)
 
     def language(self, language_code):
         language_code = self.get_language_key(language_code)
-        results = self.language_or_default(language_code)
-        if self.is_default_language(language_code):
-            return results
-        return results.filter(translations__has_key=(language_code))
+        return self.get_queryset(language_code).language(language_code)

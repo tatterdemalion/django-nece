@@ -77,12 +77,24 @@ class TranslationModel(models.Model, TranslationMixin):
         return self
 
     def language_or_none(self, language_code):
+        language_code = self.get_language_key(language_code)
         if self.is_default_language(language_code):
             return self.language(language_code)
-        language_code = self.get_language_key(language_code)
-        if not self.translations or self.translations.get(language_code):
+        if not self.translations or not self.translations.get(language_code):
             return None
         return self.language(language_code)
+
+    def language_as_dict(self, language_code):
+        tf = self.translatable_fields
+        language_code = self.get_language_key(language_code)
+        if self.is_default_language(language_code):
+            return {k: v for k, v in self.__dict__.items() if k in tf}
+
+        translations = self.translations or {}
+        if translations:
+            translations = translations.get(language_code, {})
+            return {k: v for k, v in translations.items() if v}
+        return {}
 
     def save(self, *args, **kwargs):
         language_code = self._language_code

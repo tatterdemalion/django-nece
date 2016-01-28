@@ -63,3 +63,12 @@ class TranslationTest(TestCase):
     def test_translation_mapping(self):
         self.assertTrue(Fruit.objects.language('tr').exists())
         self.assertEqual(Fruit.objects.language('tr')[0].name, 'elma')
+
+    def test_language_as_dict(self):
+        fruit = Fruit.objects.get(name='apple')
+        self.assertEqual(fruit.language_as_dict('en_us'),
+                         {'benefits': u'good for health', 'name': u'apple'})
+        fruit.translate('az_az', name='alma')
+        self.assertEqual(fruit.language_as_dict('az_az'),
+                         {'name': 'alma'})
+        self.assertEqual(fruit.language_as_dict('non_existant'), {})

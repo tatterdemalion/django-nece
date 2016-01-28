@@ -93,7 +93,7 @@ class TranslationModel(models.Model, TranslationMixin):
         translations = self.translations or {}
         if translations:
             translations = translations.get(language_code, {})
-            return {k: v for k, v in translations.items() if v}
+            return {k: v for k, v in translations.items() if v and k in tf}
         return {}
 
     def save(self, *args, **kwargs):

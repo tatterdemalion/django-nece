@@ -37,7 +37,7 @@ language if there is no corresponding translation for an object. And it
 holds translated values in a different table, so every translation query
 results in another hit to the database.
 
-On the other hand ``django-modeldtranslation`` adds multiple additional
+On the other hand ``django-modeltranslation`` adds multiple additional
 fields for multiple languages. The number of fields inceases by the
 number of languages you need to support. At the end it becomes a huge
 chunk of an object if you need to add more than 20 languages.

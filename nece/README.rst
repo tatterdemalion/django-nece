@@ -74,7 +74,7 @@ Lets say we have a model called ``Fruit``:
     from nece.models import TranslationModel
 
     class Fruit(TranslationModel):
-        name = CharField(max_length=255)
+        name = models.CharField(max_length=255)
         translatable_fields = ['name']
 
         def __str__(self):

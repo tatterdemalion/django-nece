@@ -74,8 +74,10 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
 
 
 class TranslationManager(models.Manager, TranslationMixin):
+    _queryset_class = TranslationQuerySet
+
     def get_queryset(self, language_code=None):
-        qs = TranslationQuerySet(self.model, using=self.db, hints=self._hints)
+        qs = self._queryset_class(self.model, using=self.db, hints=self._hints)
         language_code = self.get_language_key(language_code)
         qs.language(language_code)
         return qs

@@ -192,8 +192,16 @@ Default:
 
 
 
+Contributors & Thanks
+---------------------
 
+- `Erkan Ay`_
+- `Ayman Khalil`_
+- `Gönül Sabah`_
 
 
 .. _django-hvad: https://github.com/kristianoellegaard/django-hvad
 .. _django-modeltranslation: https://github.com/deschler/django-modeltranslation
+.. _Erkan Ay: https://github.com/erkanay
+.. _Ayman Khalil: https://github.com/aymankh86
+.. _Gönül Sabah: https://github.com/gonulsabah

@@ -173,7 +173,7 @@ Example:
         "fr": "fr_fr",
         "hu": "hu_hu",
         "it": "it_it",
-        "ja": "ja_ja",
+        "ja": "ja_jp",
         "nl": "nl_nl",
         "pl": "pl_pl",
         "pt": "pt_pt",

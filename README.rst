@@ -166,21 +166,7 @@ Example:
         "bg": "bg_bg",
         "cs": "cs_cz",
         "da": "da_dk",
-        "de": "de_de",
-        "el": "el_gr",
-        "es": "es_es",
-        "fi": "fi_fi",
-        "fr": "fr_fr",
-        "hu": "hu_hu",
-        "it": "it_it",
-        "ja": "ja_jp",
-        "nl": "nl_nl",
-        "pl": "pl_pl",
-        "pt": "pt_pt",
-        "ro": "ro_ro",
-        "ru": "ru_ru",
-        "sv": "sv_se",
-        "zh": "zh_cn"
+        ...
     }
 
 

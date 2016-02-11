@@ -84,7 +84,9 @@ Lets say we have a model called ``Fruit``:
 
     class Fruit(TranslationModel):
         name = CharField(max_length=255)
-        translatable_fields = ['name']
+
+        class TranslateMeta:
+            translatable_fields = ('name')
 
         def __str__(self):
             return self.name

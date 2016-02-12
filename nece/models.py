@@ -4,6 +4,7 @@ from collections import namedtuple
 from distutils.version import StrictVersion
 from django import get_version
 from django.db import models
+import django.db.models.options as options
 from nece.managers import TranslationManager, TranslationMixin
 from nece.exceptions import NonTranslatableFieldError
 
@@ -11,6 +12,8 @@ if StrictVersion(get_version()) >= StrictVersion('1.9.0'):
     from django.contrib.postgres.fields import JSONField
 else:
     from nece.fields.pgjson import JSONField
+
+options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('translatable_fields',)
 
 
 class TranslationModel(models.Model, TranslationMixin):
@@ -21,7 +24,8 @@ class TranslationModel(models.Model, TranslationMixin):
     objects = TranslationManager()
 
     def __init__(self, *args, **kwargs):
-        self.language_class = namedtuple('Language', self.translatable_fields)
+        self.language_class = namedtuple(
+            'Language', self._meta.translatable_fields)
         self._language_code = self._default_language_code
         return super(TranslationModel, self).__init__(*args, **kwargs)
 
@@ -36,7 +40,7 @@ class TranslationModel(models.Model, TranslationMixin):
         return attr
 
     def populate_translations(self, translations):
-        for field in self.translatable_fields:
+        for field in self._meta.translatable_fields:
             if field not in translations:
                 translations[field] = None
         return translations
@@ -48,7 +52,7 @@ class TranslationModel(models.Model, TranslationMixin):
             self.translations = self.translations or {}
             self.translations[self._language_code] = {}
         for name, value in kwargs.items():
-            if name not in self.translatable_fields:
+            if name not in self._meta.translatable_fields:
                 raise NonTranslatableFieldError(name)
             if self.is_default_language(self._language_code):
                 setattr(self, name, value)
@@ -63,7 +67,7 @@ class TranslationModel(models.Model, TranslationMixin):
 
     def language(self, language_code):
         self.reset_language()
-        fields = self.translatable_fields
+        fields = self._meta.translatable_fields
         self._language_code = self.get_language_key(language_code)
         if self.is_default_language(language_code):
             return self
@@ -88,7 +92,7 @@ class TranslationModel(models.Model, TranslationMixin):
     def language_as_dict(self, language_code=None):
         if not language_code:
             language_code = self._language_code
-        tf = self.translatable_fields
+        tf = self._meta.translatable_fields
         language_code = self.get_language_key(language_code)
         if self.is_default_language(language_code):
             return {k: v for k, v in self.__dict__.items() if k in tf}

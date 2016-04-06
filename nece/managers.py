@@ -59,7 +59,8 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
     def filter(self, *args, **kwargs):
         if not self.is_default_language(self._language_code):
             for key, value in kwargs.items():
-                if key.split('__')[0] in self.model.translatable_fields:
+                if key.split('__')[0] in \
+                        self.model._translate_meta.translatable_fields:
                     del kwargs[key]
                     key = 'translations__{}__{}'.format(
                         self._language_code, key)

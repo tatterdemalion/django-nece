@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from collections import namedtuple
 
 from distutils.version import StrictVersion
 from django import get_version
@@ -13,6 +12,12 @@ else:
     from nece.fields.pgjson import JSONField
 
 
+class Language(object):
+    def __init__(self, **translations):
+        for field, translation in translations.items():
+            setattr(self, field, translation)
+
+
 class TranslationModel(models.Model, TranslationMixin):
     translations = JSONField(null=True, blank=True)
     default_language = None
@@ -21,7 +26,6 @@ class TranslationModel(models.Model, TranslationMixin):
     objects = TranslationManager()
 
     def __init__(self, *args, **kwargs):
-        self.language_class = namedtuple('Language', self.translatable_fields)
         self._language_code = self._default_language_code
         return super(TranslationModel, self).__init__(*args, **kwargs)
 
@@ -67,14 +71,14 @@ class TranslationModel(models.Model, TranslationMixin):
         self._language_code = self.get_language_key(language_code)
         if self.is_default_language(language_code):
             return self
-        self.default_language = self.language_class(
+        self.default_language = Language(
             **{i: getattr(self, i, None) for i in fields})
         translations = self.translations or {}
         if translations:
             translations = translations.get(self._language_code, {})
             if translations:
                 translations = self.populate_translations(translations)
-                self._translated = self.language_class(**translations)
+                self._translated = Language(**translations)
         return self
 
     def language_or_none(self, language_code):

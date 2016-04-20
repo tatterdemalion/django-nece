@@ -84,10 +84,12 @@ Lets say we have a model called ``Fruit``:
 
     class Fruit(TranslationModel):
         name = CharField(max_length=255)
-        translatable_fields = ['name']
 
         def __str__(self):
             return self.name
+      
+        class Meta:
+            translatable_fields = ('name',)
 
 ``TranslationModel`` adds a jsonb field to this table and sets
 translations in a notation like the one below:

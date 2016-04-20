@@ -4,7 +4,7 @@ from collections import namedtuple
 from distutils.version import StrictVersion
 from django import get_version
 from django.db import models
-import django.db.models.options as options
+from django.db.models import options
 from nece.managers import TranslationManager, TranslationMixin
 from nece.exceptions import NonTranslatableFieldError
 
@@ -13,7 +13,7 @@ if StrictVersion(get_version()) >= StrictVersion('1.9.0'):
 else:
     from nece.fields.pgjson import JSONField
 
-options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('translatable_fields',)
+options.DEFAULT_NAMES += ('translatable_fields',)
 
 
 class TranslationModel(models.Model, TranslationMixin):

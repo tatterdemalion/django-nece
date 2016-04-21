@@ -51,7 +51,7 @@ Dependencies
 
 ::
 
-    postgresql >= 9.4
+    postgresql >= 9.4.5
     Django >= 1.8
     psycopg2 >= 2.5.4
 
@@ -186,6 +186,7 @@ Contributors & Thanks
 - `Erkan Ay`_
 - `Ayman Khalil`_
 - `Gönül Sabah`_
+- `Faruk Rahmet`_
 
 
 .. _django-hvad: https://github.com/kristianoellegaard/django-hvad
@@ -193,3 +194,4 @@ Contributors & Thanks
 .. _Erkan Ay: https://github.com/erkanay
 .. _Ayman Khalil: https://github.com/aymankh86
 .. _Gönül Sabah: https://github.com/gonulsabah
+.. _Faruk Rahmet: https://github.com/farukrahmet

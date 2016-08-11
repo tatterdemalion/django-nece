@@ -1,11 +1,9 @@
 from django.db import models
-from distutils.version import StrictVersion
-from django import get_version
 from django.conf import settings
 
-if StrictVersion(get_version()) >= StrictVersion('1.9.0'):
+try:
     from django.db.models.query import ModelIterable
-else:
+except ImportError:
     ModelIterable = object  # just mocking it
 
 

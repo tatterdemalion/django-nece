@@ -1,15 +1,13 @@
 from __future__ import unicode_literals
 
-from distutils.version import StrictVersion
-from django import get_version
 from django.db import models
 from django.db.models import options
 from nece.managers import TranslationManager, TranslationMixin
 from nece.exceptions import NonTranslatableFieldError
 
-if StrictVersion(get_version()) >= StrictVersion('1.9.0'):
+try:
     from django.contrib.postgres.fields import JSONField
-else:
+except ImportError:
     from nece.fields.pgjson import JSONField
 
 options.DEFAULT_NAMES += ('translatable_fields',)

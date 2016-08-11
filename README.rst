@@ -187,7 +187,7 @@ Contributors & Thanks
 - `Ayman Khalil`_
 - `Gönül Sabah`_
 - `Faruk Rahmet`_
-
+- `Mathieu Richardoz`_
 
 .. _django-hvad: https://github.com/kristianoellegaard/django-hvad
 .. _django-modeltranslation: https://github.com/deschler/django-modeltranslation
@@ -195,3 +195,4 @@ Contributors & Thanks
 .. _Ayman Khalil: https://github.com/aymankh86
 .. _Gönül Sabah: https://github.com/gonulsabah
 .. _Faruk Rahmet: https://github.com/farukrahmet
+.. _Mathieu Richardoz: https://github.com/metamatik

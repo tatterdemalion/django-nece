@@ -64,12 +64,6 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
                     kwargs[key] = value
         return super(TranslationQuerySet, self).filter(*args, **kwargs)
 
-    def iterator(self):
-        for obj in super(TranslationQuerySet, self).iterator():
-            if self._language_code:
-                obj.language(self._language_code)
-            yield obj
-
 
 class TranslationManager(models.Manager, TranslationMixin):
     _queryset_class = TranslationQuerySet

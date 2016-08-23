@@ -28,6 +28,12 @@ class TranslationTest(TestCase):
         fruits = Fruit.objects.language_or_default('tr_tr')
         self.assertEqual(fruits.count(), 3)
 
+    def test_language_or_none(self):
+        fruit = Fruit.objects.get(name='apple')
+        self.assertEqual(fruit.language_or_none('en').name, 'apple')
+        self.assertEqual(fruit.language_or_none('tr').name, 'elma')
+        self.assertEqual(fruit.language_or_none('gibrish'), None)
+
     def test_language_switch(self):
         fruit = Fruit.objects.get(name='apple')
         self.assertEqual(fruit.name, 'apple')
@@ -66,6 +72,8 @@ class TranslationTest(TestCase):
 
     def test_language_as_dict(self):
         fruit = Fruit.objects.get(name='apple')
+        self.assertEqual(fruit.language_as_dict(),  # default lang
+                         {'benefits': u'good for health', 'name': u'apple'})
         self.assertEqual(fruit.language_as_dict('en_us'),
                          {'benefits': u'good for health', 'name': u'apple'})
         fruit.translate('az_az', name='alma')
@@ -75,4 +83,5 @@ class TranslationTest(TestCase):
 
     def test_values(self):
         names = Fruit.objects.values()
+        self.assertEqual(names.count(), Fruit.objects.count())
         self.assertEqual(len(names), Fruit.objects.count())

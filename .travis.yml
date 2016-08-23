@@ -13,7 +13,6 @@ script:
 
 env:
   matrix:
-    - DJANGO=1.8 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
     - DJANGO=1.9 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
     - DJANGO=1.10 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
 

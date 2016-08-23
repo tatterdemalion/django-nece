@@ -72,3 +72,7 @@ class TranslationTest(TestCase):
         self.assertEqual(fruit.language_as_dict('az_az'),
                          {'name': 'alma'})
         self.assertEqual(fruit.language_as_dict('non_existant'), {})
+
+    def test_values(self):
+        names = Fruit.objects.values()
+        self.assertEqual(len(names), Fruit.objects.count())

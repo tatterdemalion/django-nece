@@ -5,10 +5,7 @@ from django.db.models import options
 from nece.managers import TranslationManager, TranslationMixin
 from nece.exceptions import NonTranslatableFieldError
 
-try:
-    from django.contrib.postgres.fields import JSONField
-except ImportError:
-    from nece.fields.pgjson import JSONField
+from django.contrib.postgres.fields import JSONField
 
 options.DEFAULT_NAMES += ('translatable_fields',)
 

@@ -189,6 +189,9 @@ Contributors & Thanks
 - `Faruk Rahmet`_
 - `Mathieu Richardoz`_
 
+`Change Log`_
+
+
 .. _django-hvad: https://github.com/kristianoellegaard/django-hvad
 .. _django-modeltranslation: https://github.com/deschler/django-modeltranslation
 .. _Erkan Ay: https://github.com/erkanay
@@ -196,3 +199,4 @@ Contributors & Thanks
 .. _Gönül Sabah: https://github.com/gonulsabah
 .. _Faruk Rahmet: https://github.com/farukrahmet
 .. _Mathieu Richardoz: https://github.com/metamatik
+.. _Change Log: https://github.com/tatterdemalion/django-nece/blob/master/CHANGELOG.md

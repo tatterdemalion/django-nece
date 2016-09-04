@@ -1,10 +1,6 @@
 from django.db import models
 from django.conf import settings
-
-try:
-    from django.db.models.query import ModelIterable
-except ImportError:
-    ModelIterable = object  # just mocking it
+from django.db.models.query import ModelIterable
 
 
 class TranslationMixin(object):
@@ -63,12 +59,6 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
                         self._language_code, key)
                     kwargs[key] = value
         return super(TranslationQuerySet, self).filter(*args, **kwargs)
-
-    def iterator(self):
-        for obj in super(TranslationQuerySet, self).iterator():
-            if self._language_code:
-                obj.language(self._language_code)
-            yield obj
 
 
 class TranslationManager(models.Manager, TranslationMixin):

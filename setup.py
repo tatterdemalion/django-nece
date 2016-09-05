@@ -25,7 +25,7 @@ setup(
     keywords=['translations', 'i18n', 'language', 'multilingual'],
     packages=['nece'],
     install_requires=[
-        'Django>=1.8',
+        'Django>=1.9',
         'psycopg2>=2.5.4'
     ],
     license='BSD License',

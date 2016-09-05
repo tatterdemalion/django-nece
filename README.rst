@@ -188,6 +188,7 @@ Contributors & Thanks
 - `Gönül Sabah`_
 - `Faruk Rahmet`_
 - `Mathieu Richardoz`_
+- `Marc Hertzog`_
 
 `Change Log`_
 
@@ -199,4 +200,5 @@ Contributors & Thanks
 .. _Gönül Sabah: https://github.com/gonulsabah
 .. _Faruk Rahmet: https://github.com/farukrahmet
 .. _Mathieu Richardoz: https://github.com/metamatik
+.. _Marc Hertzog: https://github.com/kemar
 .. _Change Log: https://github.com/tatterdemalion/django-nece/blob/master/CHANGELOG.md

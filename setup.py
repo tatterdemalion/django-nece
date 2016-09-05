@@ -23,8 +23,7 @@ setup(
     url=url,
     download_url=download_url,
     keywords=['translations', 'i18n', 'language', 'multilingual'],
-    packages=['nece', 'nece.fields', 'nece.fields.pgjson',
-              'nece.fields.pgjson.forms'],
+    packages=['nece'],
     install_requires=[
         'Django>=1.8',
         'psycopg2>=2.5.4'

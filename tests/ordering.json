@@ -1,0 +1,163 @@
+[
+  {
+    "model": "tests.fruit",
+    "pk": 1,
+    "fields": {
+      "translations": {
+        "fr_fr": {
+          "name": "Poire",
+          "benefits": ""
+        },
+        "tr_tr": {
+          "name": "Armut",
+          "benefits": ""
+        },
+        "en_us": {
+          "name": "Pear",
+          "benefits": ""
+        }
+      },
+      "name": "Pear",
+      "benefits": "",
+      "scientific_name": ""
+    }
+  },
+  {
+    "model": "tests.fruit",
+    "pk": 2,
+    "fields": {
+      "translations": {
+        "fr_fr": {
+          "name": "Pomme",
+          "benefits": ""
+        },
+        "tr_tr": {
+          "name": "Elma",
+          "benefits": ""
+        },
+        "en_us": {
+          "name": "Apple",
+          "benefits": ""
+        }
+      },
+      "name": "Apple",
+      "benefits": "",
+      "scientific_name": ""
+    }
+  },
+  {
+    "model": "tests.fruit",
+    "pk": 3,
+    "fields": {
+      "translations": {
+        "fr_fr": {
+          "name": "Citron",
+          "benefits": ""
+        },
+        "tr_tr": {
+          "name": "Limon",
+          "benefits": ""
+        },
+        "en_us": {
+          "name": "Lemon",
+          "benefits": ""
+        }
+      },
+      "name": "Lemon",
+      "benefits": "",
+      "scientific_name": ""
+    }
+  },
+  {
+    "model": "tests.fruit",
+    "pk": 4,
+    "fields": {
+      "translations": {
+        "fr_fr": {
+          "name": "Pamplemousse",
+          "benefits": ""
+        },
+        "tr_tr": {
+          "name": "Greyfurt",
+          "benefits": ""
+        },
+        "en_us": {
+          "name": "Grapefruit",
+          "benefits": ""
+        }
+      },
+      "name": "Grapefruit",
+      "benefits": "",
+      "scientific_name": ""
+    }
+  },
+  {
+    "model": "tests.fruit",
+    "pk": 5,
+    "fields": {
+      "translations": {
+        "fr_fr": {
+          "name": "Fraise",
+          "benefits": ""
+        },
+        "tr_tr": {
+          "name": "Çilek",
+          "benefits": ""
+        },
+        "en_us": {
+          "name": "Strawberry",
+          "benefits": ""
+        }
+      },
+      "name": "Strawberry",
+      "benefits": "",
+      "scientific_name": ""
+    }
+  },
+  {
+    "model": "tests.fruit",
+    "pk": 6,
+    "fields": {
+      "translations": {
+        "fr_fr": {
+          "name": "Orange",
+          "benefits": ""
+        },
+        "tr_tr": {
+          "name": "Portakal",
+          "benefits": ""
+        },
+        "en_us": {
+          "name": "Orange",
+          "benefits": ""
+        }
+      },
+      "name": "Orange",
+      "benefits": "",
+      "scientific_name": ""
+    }
+  },
+  {
+    "model": "tests.fruit",
+    "pk": 7,
+    "fields": {
+      "translations": {
+        "fr_fr": {
+          "name": "Banane",
+          "benefits": ""
+        },
+        "tr_tr": {
+          "name": "Muz",
+          "benefits": ""
+        },
+        "en_us": {
+          "name": "Banana",
+          "benefits": ""
+        }
+      },
+      "name": "Banana",
+      "benefits": "",
+      "scientific_name": ""
+    }
+  }
+]

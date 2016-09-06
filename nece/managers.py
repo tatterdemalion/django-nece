@@ -1,5 +1,6 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
+from django.db.models.expressions import RawSQL
 from django.db.models.query import ModelIterable
 
 
@@ -60,6 +61,29 @@ class TranslationQuerySet(models.QuerySet, TranslationMixin):
                     kwargs[key] = value
         return super(TranslationQuerySet, self).filter(*args, **kwargs)
 
+    def order_by_json_path(self, json_path, language_code=None, order='asc'):
+        """
+        Orders a queryset by the value of the specified `json_path`.
+
+        More about the `#>>` operator and the `json_path` arg syntax:
+        https://www.postgresql.org/docs/current/static/functions-json.html
+
+        More about Raw SQL expressions:
+        https://docs.djangoproject.com/en/dev/ref/models/expressions/#raw-sql-expressions
+
+        Usage example:
+            MyModel.objects.language('en_us').filter(is_active=True).order_by_json_path('title')
+        """
+        language_code = (language_code
+                            or self._language_code
+                            or self.get_language_key(language_code))
+        json_path = '{%s,%s}' % (language_code, json_path)
+        # Our jsonb field is named `translations`.
+        raw_sql_expression = RawSQL("translations#>>%s", (json_path,))
+        if order == 'desc':
+            raw_sql_expression = raw_sql_expression.desc()
+        return self.order_by(raw_sql_expression)
+
 
 class TranslationManager(models.Manager, TranslationMixin):
     _queryset_class = TranslationQuerySet
@@ -78,3 +102,14 @@ class TranslationManager(models.Manager, TranslationMixin):
     def language(self, language_code):
         language_code = self.get_language_key(language_code)
         return self.get_queryset(language_code).language(language_code)
+
+    def order_by_json_path(self, json_path, language_code=None, order='asc'):
+        """
+        Makes the method available through the manager (i.e. `Model.objects`).
+
+        Usage example:
+            MyModel.objects.order_by_json_path('title', order='desc')
+            MyModel.objects.order_by_json_path('title', language_code='en_us', order='desc')
+        """
+        return self.get_queryset(language_code).order_by_json_path(
+            json_path, language_code=language_code, order=order)

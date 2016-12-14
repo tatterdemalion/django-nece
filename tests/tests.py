@@ -1,13 +1,20 @@
 #-*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+import os
+
+from django.core.management import call_command
 from django.test import TestCase
-from .models import Fruit
-from .fixtures import create_fixtures
+
 from nece.exceptions import NonTranslatableFieldError
+
+from .fixtures import create_fixtures
+from .models import Fruit
 
 
 class TranslationTest(TestCase):
     def setUp(self):
+        super(TranslationTest, self).setUp()
         create_fixtures()
 
     def test_basic_queries(self):
@@ -85,3 +92,99 @@ class TranslationTest(TestCase):
         names = Fruit.objects.values()
         self.assertEqual(names.count(), Fruit.objects.count())
         self.assertEqual(len(names), Fruit.objects.count())
+
+
+class TranslationOrderingTest(TestCase):
+    def setUp(self):
+        super(TranslationOrderingTest, self).setUp()
+        CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
+        call_command('loaddata', '%s/ordering.json' % CURRENT_DIR)
+
+    def test_order_by_name_asc(self):
+        # en_us
+        expected_order = [
+            'Apple',
+            'Banana',
+            'Grapefruit',
+            'Lemon',
+            'Orange',
+            'Pear',
+            'Strawberry',
+        ]
+        fruits = Fruit.objects.language('en_us').order_by_json_path('name')
+        for i, fruit in enumerate(fruits):
+            self.assertEqual(fruit.name, expected_order[i])
+
+        # fr_fr
+        expected_order = [
+            'Banane',
+            'Citron',
+            'Fraise',
+            'Orange',
+            'Pamplemousse',
+            'Poire',
+            'Pomme',
+        ]
+        fruits = Fruit.objects.language('fr_fr').order_by_json_path('name')
+        for i, fruit in enumerate(fruits):
+            self.assertEqual(fruit.name, expected_order[i])
+
+        # tr_tr
+        expected_order = [
+            'Armut',
+            'Çilek',
+            'Elma',
+            'Greyfurt',
+            'Limon',
+            'Muz',
+            'Portakal',
+        ]
+        fruits = Fruit.objects.language('tr_tr').order_by_json_path('name')
+        for i, fruit in enumerate(fruits):
+            self.assertEqual(fruit.name, expected_order[i])
+
+    def test_order_by_name_desc(self):
+        # en_us
+        expected_order = [
+            'Strawberry',
+            'Pear',
+            'Orange',
+            'Lemon',
+            'Grapefruit',
+            'Banana',
+            'Apple',
+        ]
+        fruits = Fruit.objects.order_by_json_path(
+            'name', language_code='en_us', order='desc')
+        for i, fruit in enumerate(fruits):
+            self.assertEqual(fruit.name, expected_order[i])
+
+        # fr_fr
+        expected_order = [
+            'Pomme',
+            'Poire',
+            'Pamplemousse',
+            'Orange',
+            'Fraise',
+            'Citron',
+            'Banane',
+        ]
+        fruits = Fruit.objects.order_by_json_path(
+            'name', language_code='fr_fr', order='desc')
+        for i, fruit in enumerate(fruits):
+            self.assertEqual(fruit.name, expected_order[i])
+
+        # tr_tr
+        expected_order = [
+            'Portakal',
+            'Muz',
+            'Limon',
+            'Greyfurt',
+            'Elma',
+            'Çilek',
+            'Armut',
+        ]
+        fruits = Fruit.objects.order_by_json_path(
+            'name', language_code='tr_tr', order='desc')
+        for i, fruit in enumerate(fruits):
+            self.assertEqual(fruit.name, expected_order[i])

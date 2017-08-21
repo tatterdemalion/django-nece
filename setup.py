@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-
 with open('README.rst') as f:
     ld = f.read()
 
 long_description = ld.replace(ld[0:ld.find('nece?')], '')
 
-version = '0.6.1'
+version = '0.7.0'
 description = "A content translation framework using Postgresql's jsonb" + \
     " field in the background"
 url = 'https://github.com/tatterdemalion/django-nece'
 download_url = '/'.join([url, 'tarball', version])
+
+with open('requirements.txt') as f:
+    install_requires = f.read().splitlines()
 
 setup(
     name='nece',
@@ -24,10 +26,7 @@ setup(
     download_url=download_url,
     keywords=['translations', 'i18n', 'language', 'multilingual'],
     packages=['nece'],
-    install_requires=[
-        'Django>=1.9',
-        'psycopg2>=2.5.4'
-    ],
+    install_requires=install_requires,
     license='BSD License',
     classifiers=[
         "Framework :: Django",

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
-from pip.req import parse_requirements
 
 with open('README.rst') as f:
     ld = f.read()
@@ -13,8 +12,8 @@ description = "A content translation framework using Postgresql's jsonb" + \
 url = 'https://github.com/tatterdemalion/django-nece'
 download_url = '/'.join([url, 'tarball', version])
 
-install_reqs = parse_requirements('requirements.txt')
-
+with open('requirements.txt') as f:
+    install_requires = f.read.splitlines()
 
 setup(
     name='nece',
@@ -27,7 +26,7 @@ setup(
     download_url=download_url,
     keywords=['translations', 'i18n', 'language', 'multilingual'],
     packages=['nece'],
-    install_requires = [str(ir.req) for ir in install_reqs],
+    install_requires=install_requires,
     license='BSD License',
     classifiers=[
         "Framework :: Django",

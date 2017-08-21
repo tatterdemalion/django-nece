@@ -1,5 +1,9 @@
 #CHANGELOG
 
+## 0.7.0
+
+* Django 1.11 and Python 3.6 support
+
 ## 0.6.0
 
 * Django 1.8 support dropped

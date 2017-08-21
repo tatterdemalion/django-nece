@@ -13,7 +13,7 @@ url = 'https://github.com/tatterdemalion/django-nece'
 download_url = '/'.join([url, 'tarball', version])
 
 with open('requirements.txt') as f:
-    install_requires = f.read.splitlines()
+    install_requires = f.read().splitlines()
 
 setup(
     name='nece',

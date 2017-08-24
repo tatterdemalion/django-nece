@@ -12,9 +12,6 @@ description = "A content translation framework using Postgresql's jsonb" + \
 url = 'https://github.com/tatterdemalion/django-nece'
 download_url = '/'.join([url, 'tarball', version])
 
-with open('requirements.txt') as f:
-    install_requires = f.read().splitlines()
-
 setup(
     name='nece',
     version=version,
@@ -26,7 +23,10 @@ setup(
     download_url=download_url,
     keywords=['translations', 'i18n', 'language', 'multilingual'],
     packages=['nece'],
-    install_requires=install_requires,
+    install_requires=[
+        'Django>=1.9',
+        'psycopg2>=2.5.4',
+    ],
     license='BSD License',
     classifiers=[
         "Framework :: Django",

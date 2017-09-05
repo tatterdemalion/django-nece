@@ -48,7 +48,9 @@ class TranslationModel(models.Model, TranslationMixin):
             self._language_code = language_code
         if not self.is_default_language(self._language_code):
             self.translations = self.translations or {}
-            self.translations[self._language_code] = {}
+            self.translations[self._language_code] = self.translations.get(
+                self._language_code, {}
+            )
         for name, value in kwargs.items():
             if name not in self._meta.translatable_fields:
                 raise NonTranslatableFieldError(name)

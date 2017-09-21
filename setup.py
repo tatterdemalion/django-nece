@@ -27,7 +27,7 @@ setup(
     install_requires=[
         'Django>=1.9',
         'psycopg2>=2.5.4',
-        'six==1.10.0',
+        'six>=1.10.0',
     ],
     license='BSD License',
     classifiers=[

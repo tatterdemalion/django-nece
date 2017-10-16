@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 import os
@@ -6,10 +6,23 @@ import os
 from django.core.management import call_command
 from django.test import TestCase
 
+from nece import managers
 from nece.exceptions import NonTranslatableFieldError
 
 from .fixtures import create_fixtures
 from .models import Fruit
+
+
+class MixinObject(managers.TranslationMixin):
+    pass
+
+
+class TranslationMixinTest(TestCase):
+
+    def test_get_language_keys(self):
+        obj = MixinObject()
+        self.assertEqual(['en_us', 'en_gb'], obj.get_language_keys('en_us'))
+        self.assertEqual(['en_us', 'en_gb'], obj.get_language_keys('en'))
 
 
 class TranslationTest(TestCase):
@@ -50,6 +63,15 @@ class TranslationTest(TestCase):
         fruit.language('de_de')
         self.assertEqual(fruit.name, 'Apfel')
         self.assertEqual(fruit.default_language.name, 'apple')
+        fruit.language('fr_fr')
+        self.assertEqual(fruit.name, 'pomme')
+        self.assertEqual(fruit.default_language.name, 'apple')
+        fruit.language('fr_ca')
+        self.assertEqual(fruit.name, 'pomme')
+        self.assertEqual(fruit.default_language.name, 'apple')
+        fruit.language('fr_ca', fallback=False)
+        self.assertEqual(fruit.name, 'apple')
+        self.assertEqual(fruit.default_language.name, 'apple')
 
     def test_save_correct_languages(self):
         fruit = Fruit.objects.get(name='apple')
@@ -86,7 +108,12 @@ class TranslationTest(TestCase):
         fruit.translate('az_az', name='alma')
         self.assertEqual(fruit.language_as_dict('az_az'),
                          {'name': 'alma'})
-        self.assertEqual(fruit.language_as_dict('non_existant'), {})
+        self.assertEqual(fruit.language_as_dict('non_existant', fallback=False), {})
+        self.assertEqual(fruit.language_as_dict('fr_fr'),
+                         {'name': 'pomme', 'benefits': 'bon pour la santé'})
+        self.assertEqual(fruit.language_as_dict('fr_ca'),
+                         {'name': 'pomme', 'benefits': 'bon pour la santé'})
+        self.assertEqual(fruit.language_as_dict('fr_ca', fallback=False), {})
 
     def test_values(self):
         names = Fruit.objects.values()
@@ -188,3 +215,4 @@ class TranslationOrderingTest(TestCase):
             'name', language_code='tr_tr', order='desc')
         for i, fruit in enumerate(fruits):
             self.assertEqual(fruit.name, expected_order[i])
+

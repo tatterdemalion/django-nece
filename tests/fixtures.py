@@ -12,6 +12,10 @@ def get_fixtures(n=None):
                     "benefits": "gut für die Feuerstelle",
                     "name": "Apfel"
                 },
+                "fr_fr": {
+                    "benefits": "bon pour la santé",
+                    "name": "pomme"
+                },
                 "ku_tr": {
                     "name": "sêv"
                 },

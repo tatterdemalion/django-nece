@@ -1,28 +1,54 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 from django.db.models.expressions import RawSQL
 from django.db.models.query import ModelIterable
 
 
+TRANSLATIONS_DEFAULT = getattr(settings, 'TRANSLATIONS_DEFAULT', 'en_us')
+TRANSLATIONS_MAP = getattr(settings, 'TRANSLATIONS_MAP', {'en': 'en_us'})
+TRANSLATIONS_FALLBACK = getattr(settings, 'TRANSLATIONS_FALLBACK', {})  # TODO: check it's a list
+if any(not isinstance(val, list) for val in TRANSLATIONS_FALLBACK.values()):
+    raise ImproperlyConfigured("TRANSLATIONS_FALLBACK should be a dict of str and list, e.g., {'en_gb': ['en_us']}).")
+
+
 class TranslationMixin(object):
-    TRANSLATIONS_DEFAULT = getattr(settings, 'TRANSLATIONS_DEFAULT', 'en_us')
-    TRANSLATIONS_MAP = getattr(settings, 'TRANSLATIONS_MAP', {'en': 'en_us'})
+
     _default_language_code = TRANSLATIONS_DEFAULT
 
     def get_language_key(self, language_code):
-        return (self.TRANSLATIONS_MAP.get(language_code, language_code) or
-                self._default_language_code)
+        return self.get_language_keys(language_code)[0]
+
+    def get_language_keys(self, language_code, fallback=True):
+        """Return the possible language codes"""
+        codes = []
+
+        code = TRANSLATIONS_MAP.get(language_code, language_code)
+        codes.append(code)
+
+        if not fallback:
+            return codes
+
+        fallback_codes = TRANSLATIONS_FALLBACK.get(code)
+        if fallback_codes:
+            codes.extend(fallback_codes)
+
+        if self._default_language_code not in codes:
+            codes.append(self._default_language_code)
+        return codes
 
     def is_default_language(self, language_code):
         language_code = self.get_language_key(language_code)
-        return language_code == self.TRANSLATIONS_DEFAULT
+        return language_code == TRANSLATIONS_DEFAULT
 
 
 class TranslationModelIterable(ModelIterable):
     def __iter__(self):
         for obj in super(TranslationModelIterable, self).__iter__():
             if self.queryset._language_code:
-                obj.language(self.queryset._language_code)
+                # Set the current language without fallback
+                # as query does not support fallback
+                obj.language(self.queryset._language_code, fallback=False)
             yield obj
 
 
@@ -90,7 +116,7 @@ class TranslationManager(models.Manager, TranslationMixin):
 
     def get_queryset(self, language_code=None):
         qs = self._queryset_class(self.model, using=self.db, hints=self._hints)
-        language_code = self.get_language_key(language_code)
+        language_code = self.get_language_key(language_code or self._default_language_code)
         qs.language(language_code)
         return qs
 

@@ -1,11 +1,19 @@
 language: python
 
-python:
-  - 2.7
-  - 3.4
-  - 3.5
-  - 3.6
-  - 3.7
+matrix:
+  include:
+    - python: 2.7
+    - python: 3.4
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+      dist: xenial
+      sudo: true
+
+  exclude:
+    - python: 2.7
+      env: DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+
 
 script:
   - python setup.py build_ext -i
@@ -20,10 +28,6 @@ env:
     - DJANGO=1.11 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
     - DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
 
-matrix:
-  exclude:
-    - python: 2.7
-      env: DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
 
 before_script:
   - sh -c "psql -c 'DROP DATABASE IF EXISTS django_nece_test;' -U postgres;

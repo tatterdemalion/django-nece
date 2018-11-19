@@ -189,6 +189,7 @@ Contributors & Thanks
 - `Faruk Rahmet`_
 - `Mathieu Richardoz`_
 - `Marc Hertzog`_
+- `Alexey Kotenko`_
 
 `Change Log`_
 
@@ -201,4 +202,6 @@ Contributors & Thanks
 .. _Faruk Rahmet: https://github.com/farukrahmet
 .. _Mathieu Richardoz: https://github.com/metamatik
 .. _Marc Hertzog: https://github.com/kemar
+.. _Alexey Kotenko: https://github.com/k0t3n
 .. _Change Log: https://github.com/tatterdemalion/django-nece/blob/master/CHANGELOG.md
+

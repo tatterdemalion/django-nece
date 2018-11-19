@@ -1,42 +1,73 @@
 language: python
 
-python:
-  - 2.7
-  - 3.4
-  - 3.5
-  - 3.6
 
-script:
-  - python setup.py build_ext -i
-  - python -m compileall -f .
-  - python runtests.py
-  - coverage run --source=nece --omit='nece/tests*' runtests.py
+templates:
+  py37: &py37
+    python: 3.7
+    dist: xenial
+    sudo: required
+
+  django1-9: &django1-9 DJANGO=1.9
+  django1-10: &django1-10 DJANGO=1.10
+  django1-11: &django1-11 DJANGO=1.11
+  django2-0: &django2-0 DJANGO=2.0
+
+  postgres: &postgres DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+
+matrix:
+  include:
+  - { python: 2.7, env: [*django1-9, *postgres]}
+  - { python: 2.7, env: [*django1-10, *postgres]}
+  - { python: 2.7, env: [*django1-11, *postgres]}
+
+  - { python: 3.4, env: [*django1-9, *postgres]}
+  - { python: 3.4, env: [*django1-10, *postgres]}
+  - { python: 3.4, env: [*django1-11, *postgres]}
+  - { python: 3.4, env: [*django2-0, *postgres]}
+
+  - { python: 3.5, env: [*django1-9, *postgres]}
+  - { python: 3.5, env: [*django1-10, *postgres]}
+  - { python: 3.5, env: [*django1-11, *postgres]}
+  - { python: 3.5, env: [*django2-0, *postgres]}
+
+  - { python: 3.6, env: [*django1-9, *postgres]}
+  - { python: 3.6, env: [*django1-10, *postgres]}
+  - { python: 3.6, env: [*django1-11, *postgres]}
+  - { python: 3.6, env: [*django2-0, *postgres]}
+
+  - { <<: *py37, env: [*django1-9, *postgres]}
+  - { <<: *py37, env: [*django1-10, *postgres]}
+  - { <<: *py37, env: [*django1-11, *postgres]}
+  - { <<: *py37, env: [*django2-0, *postgres]}
+
 
 env:
   matrix:
-    - DJANGO=1.9 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-    - DJANGO=1.10 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-    - DJANGO=1.11 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-    - DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+  - DJANGO=1.9 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+  - DJANGO=1.10 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+  - DJANGO=1.11 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+  - DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
 
-matrix:
-  exclude:
-    - python: 2.7
-      env: DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+
+script:
+- python setup.py build_ext -i
+- python -m compileall -f .
+- python runtests.py
+- coverage run --source=nece --omit='nece/tests*' runtests.py
 
 
 before_script:
-  - sh -c "psql -c 'DROP DATABASE IF EXISTS django_nece_test;' -U postgres;
-    psql -c 'create database django_nece_test;' -U postgres;"
+- sh -c "psql -c 'DROP DATABASE IF EXISTS django_nece_test;' -U postgres;
+  psql -c 'create database django_nece_test;' -U postgres;"
 
 install:
-  - pip install -q -r "tests/requirements/django-$DJANGO.txt"
+- pip install -q -r "tests/requirements/django-$DJANGO.txt"
 
 after_success:
-  - coveralls
+- coveralls
 
 services:
-  - postgresql
+- postgresql
 
 addons:
   postgresql: "9.4"

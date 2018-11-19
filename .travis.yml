@@ -41,14 +41,6 @@ matrix:
   - { <<: *py37, env: [*django2-0, *postgres]}
 
 
-env:
-  matrix:
-  - DJANGO=1.9 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-  - DJANGO=1.10 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-  - DJANGO=1.11 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-  - DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-
-
 script:
 - python setup.py build_ext -i
 - python -m compileall -f .

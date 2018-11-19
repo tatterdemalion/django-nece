@@ -14,19 +14,18 @@ matrix:
     - python: 2.7
       env: DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
 
+env:
+  - DJANGO=1.9 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+  - DJANGO=1.10 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+  - DJANGO=1.11 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+  - DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
+
 
 script:
   - python setup.py build_ext -i
   - python -m compileall -f .
   - python runtests.py
   - coverage run --source=nece --omit='nece/tests*' runtests.py
-
-env:
-  matrix:
-    - DJANGO=1.9 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-    - DJANGO=1.10 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-    - DJANGO=1.11 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
-    - DJANGO=2.0 DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
 
 
 before_script:

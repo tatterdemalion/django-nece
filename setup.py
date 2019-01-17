@@ -2,8 +2,8 @@
 from setuptools import setup
 
 
-with open('README.rst') as f:
-    ld = f.read()
+with open('README.rst', 'rb') as f:
+    ld = f.read().decode('utf8')
 
 long_description = ld.replace(ld[0:ld.find('nece?')], '')
 

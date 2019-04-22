@@ -26,7 +26,7 @@ setup(
     packages=['nece'],
     install_requires=[
         'Django>=1.9',
-        'psycopg2>=2.5.4',
+        'psycopg2-binary>=2.8.1',
         'six>=1.10.0',
     ],
     license='BSD License',

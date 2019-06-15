@@ -179,6 +179,20 @@ Default:
     {'en': 'en_us'}
 
 
+TRANSLATIONS_FALLBACK
+~~~~~~~~~~~~~~~~~~~~~
+
+Fallback language would be used if a translation is missing.
+
+Example:
+
+::
+    TRANSLATIONS_FALLBACK = {
+        'fr_ca': ['fr_fr'],
+        'en_us': ['en_gb'],
+    }
+
+
 
 Contributors & Thanks
 ---------------------

@@ -18,6 +18,7 @@ setup(
     version=version,
     description=description,
     long_description=long_description,
+    long_description_content_type='text/markdown',
     author='Can Mustafa Özdemir',
     author_email='canmustafaozdemir@gmail.com',
     url=url,

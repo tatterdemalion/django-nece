@@ -192,6 +192,20 @@ Example:
         'en_us': ['en_gb'],
     }
 
+Admin panel
+--------
+Use `TranslatableModelAdmin` for pretty JSON editor (powered by `django-admin-json-editor`_).
+
+.. figure:: https://raw.githubusercontent.com/tatterdemalion/django-nece/master/images/admin.png
+   :alt: nece
+
+Example:
+::
+    from nece.admin import TranslatableModelAdmin
+
+    class PlaceAdmin(TranslatableModelAdmin):
+        list_display = ('title')
+        ...
 
 
 Contributors & Thanks
@@ -218,4 +232,5 @@ Contributors & Thanks
 .. _Marc Hertzog: https://github.com/kemar
 .. _Alexey Kotenko: https://github.com/k0t3n
 .. _Change Log: https://github.com/tatterdemalion/django-nece/blob/master/CHANGELOG.md
+.. _django-admin-json-editor: https://github.com/abogushov/django-admin-json-editor
 

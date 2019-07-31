@@ -200,12 +200,21 @@ Use `TranslatableModelAdmin` for pretty JSON editor (powered by `django-admin-js
    :alt: nece
 
 Example:
-::
-    from nece.admin import TranslatableModelAdmin
 
-    class PlaceAdmin(TranslatableModelAdmin):
-        list_display = ('title')
-        ...
+.. code-block:: python
+
+   # settings.py
+   INSTALLED_APPS = [
+       ...
+       'django_admin_json_editor',
+       ...
+   ]
+
+   # admin.py
+   from nece.admin import TranslatableModelAdmin
+
+   class PlaceAdmin(TranslatableModelAdmin):
+       list_display = ('...')
 
 
 Contributors & Thanks

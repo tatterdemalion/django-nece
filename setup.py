@@ -27,9 +27,12 @@ setup(
     packages=['nece'],
     install_requires=[
         'Django>=1.9',
-        'psycopg2-binary>=2.8.1',
         'six>=1.10.0',
     ],
+    extras_require={
+        'psycopg2':  ['psycopg2>=2.8.1'],
+        'psycopg2-binary': ['psycopg2-binary>=2.8.1'],
+    },
     license='BSD License',
     classifiers=[
         "Framework :: Django",

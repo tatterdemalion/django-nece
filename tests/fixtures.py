@@ -22,7 +22,11 @@ def get_fixtures(n=None):
                 "tr_tr": {
                     "benefits": "Kalbe yararlıdır",
                     "name": "elma"
-                }
+                },
+                "en_us": {
+                    "benefits": "there are benefits",
+                    "name": "new york"
+                },
             },
             "name": "apple",
             "benefits": "good for health",

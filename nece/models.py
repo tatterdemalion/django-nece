@@ -89,7 +89,7 @@ class TranslationModel(models.Model, TranslationMixin):
                     self._language_code = code
                     trans = self.populate_translations(translations)
                     self._translated = Language(**trans)
-                    continue
+                    break
 
         return self
 

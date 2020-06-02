@@ -120,6 +120,21 @@ class TranslationTest(TestCase):
         self.assertEqual(names.count(), Fruit.objects.count())
         self.assertEqual(len(names), Fruit.objects.count())
 
+    def test_save_translation_in_jsonb_for_default_language(self):
+        fruit = Fruit.objects.get(name='apple')
+        default_lang = fruit._default_language_code
+        default_name = (
+            f"I should be stored in fruit.name"
+            f"and in fruit.translations['{default_lang}']['name']"
+        )
+        fruit.translate(default_lang, name=default_name)
+        fruit.language(default_lang)
+
+        # In the current name attribute
+        self.assertEqual(fruit.name, default_name)
+        # In jsonb translations field
+        self.assertEqual(fruit.translations[default_lang]['name'], default_name)
+
 
 class TranslationOrderingTest(TestCase):
     def setUp(self):

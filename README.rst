@@ -11,6 +11,12 @@
     :target: https://pypi.python.org/pypi/nece/
 
 
+IMPORTANT NOTICE
+=====
+
+This repository is not maintained anymore. Please feel free to fork. If you are interested, I will be happy to transfer the ownership and help with the ecosystem (travis, pip etc...) as much as I can.
+
+
 nece?
 =====
 

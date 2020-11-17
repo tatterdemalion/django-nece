@@ -7,10 +7,18 @@ templates:
     dist: xenial
     sudo: required
 
+  py38: &py38
+    python: 3.8
+    dist: xenial
+    sudo: required
+
   django1-9: &django1-9 DJANGO=1.9
   django1-10: &django1-10 DJANGO=1.10
   django1-11: &django1-11 DJANGO=1.11
   django2-0: &django2-0 DJANGO=2.0
+  django2-1: &django2-1 DJANGO=2.1
+  django2-2: &django2-2 DJANGO=2.2
+  django3-0: &django3-0 DJANGO=3.0
 
   postgres: &postgres DATABASE_URL='postgres://postgres@127.0.0.1/django_nece_test'
 
@@ -39,7 +47,12 @@ matrix:
   - { <<: *py37, env: [*django1-10, *postgres]}
   - { <<: *py37, env: [*django1-11, *postgres]}
   - { <<: *py37, env: [*django2-0, *postgres]}
+  - { <<: *py37, env: [*django2-1, *postgres]}
+  - { <<: *py37, env: [*django2-2, *postgres]}
+  - { <<: *py37, env: [*django3-0, *postgres]}
 
+  - { <<: *py38, env: [*django2-2, *postgres]}
+  - { <<: *py38, env: [*django3-0, *postgres]}
 
 script:
 - python setup.py build_ext -i

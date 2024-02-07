@@ -1,2 +1,2 @@
 -r requirements_base.txt
-django>=3.0,<3.1
+django>=3.0,<3.3

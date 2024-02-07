@@ -1,2 +1,2 @@
 -r requirements_base.txt
-django==2.0.9
+django==3.2.24
